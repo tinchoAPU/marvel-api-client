@@ -1,11 +1,15 @@
 package com.fullstack.marvel_api_client;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.web.client.RestTemplate;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Date;
 import java.util.HexFormat;
+import java.util.List;
 
 public class MarvenApiClient {
 
@@ -19,14 +23,54 @@ public class MarvenApiClient {
     long ts= 30;
 
     final String BASE_PATH = "https://gateway.marvel.com/v1/public/characters";
+    final String HASH_PARAM = "&hash=";
+    final String TS_PARAM = "?ts=";
+    final String API_KEY_PARAM = "&apikey=";
+    final String SLASH_CHAR = "/";
 
-    void invoqueAllCharacters(){
+
+
+    List<CharacterDTO> getAllCharacters(){
         RestTemplate restTemplate = new RestTemplate();
-        String uri = new StringBuilder().append(BASE_PATH).append("?ts=").append(ts).
-                append("&apikey=").append(this.apiKey).append("&hash=").append(generateHash()).toString();
+        String uri = buildUri(null);
         System.out.println("Generated URI : " + uri);
-        MarvelApiResponse result = restTemplate.getForObject(uri, MarvelApiResponse.class);
-        System.out.println("Generated : " + result);
+
+        HttpEntity<MarvelApiResponse> entity = restTemplate.getForEntity(uri, MarvelApiResponse.class);
+
+        getTimeCalledApi(entity.getHeaders());
+
+        System.out.println("Generated : " + entity);
+
+        return entity.getBody().getData().getResults();
+    }
+
+    CharacterDTO getCharacterById(Long characterId) {
+        RestTemplate restTemplate = new RestTemplate();
+        String uri = buildUri(characterId);
+        System.out.println("Generated URI : " + uri);
+
+        HttpEntity<MarvelApiResponse> entity = restTemplate.getForEntity(uri, MarvelApiResponse.class);
+        MarvelApiResponse body = entity.getBody();
+
+        getTimeCalledApi(entity.getHeaders());
+
+        System.out.println("Generated : " + body.getData().getResults().get(0));
+        return body.getData().getResults().get(0);
+    }
+
+    void getTimeCalledApi(HttpHeaders headers) {
+        long milliSeconds = headers.getDate();
+        System.out.println("Response date : " + new Date(milliSeconds));
+    }
+
+    String buildUri(Long characterId) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(BASE_PATH);
+        if (characterId != null) {
+            stringBuilder.append(SLASH_CHAR).append(characterId);
+        }
+        return stringBuilder.append(TS_PARAM).append(ts).
+                append(API_KEY_PARAM).append(this.apiKey).append(HASH_PARAM).append(generateHash()).toString();
     }
 
     String generateHash(){

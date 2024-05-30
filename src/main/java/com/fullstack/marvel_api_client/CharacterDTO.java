@@ -48,4 +48,15 @@ public class CharacterDTO {
     public void setResourceURI(String resourceURI) {
         this.resourceURI = resourceURI;
     }
+
+    @Override
+    public String toString() {
+        return "CharacterDTO{" +
+                "id=" + id +
+                ", description='" + description + '\'' +
+                ", modified=" + modified +
+                ", name='" + name + '\'' +
+                ", resourceURI='" + resourceURI + '\'' +
+                '}';
+    }
 }
