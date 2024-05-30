@@ -1,5 +1,7 @@
-package com.fullstack.marvel_api_client;
+package com.fullstack.marvel_api_client.apiClient;
 
+import com.fullstack.marvel_api_client.dto.CharacterDTO;
+import com.fullstack.marvel_api_client.dto.MarvelApiResponse;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -30,7 +32,7 @@ public class MarvenApiClient {
 
 
 
-    List<CharacterDTO> getAllCharacters(){
+    public List<CharacterDTO> getAllCharacters(){
         RestTemplate restTemplate = new RestTemplate();
         String uri = buildUri(null);
         System.out.println("Generated URI : " + uri);
@@ -44,7 +46,7 @@ public class MarvenApiClient {
         return entity.getBody().getData().getResults();
     }
 
-    CharacterDTO getCharacterById(Long characterId) {
+    public CharacterDTO getCharacterById(Long characterId) {
         RestTemplate restTemplate = new RestTemplate();
         String uri = buildUri(characterId);
         System.out.println("Generated URI : " + uri);

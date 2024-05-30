@@ -1,4 +1,4 @@
-package com.fullstack.marvel_api_client;
+package com.fullstack.marvel_api_client.dto;
 
 public class MarvelApiResponse {
     int code;
