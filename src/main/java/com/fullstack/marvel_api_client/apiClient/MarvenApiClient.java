@@ -5,6 +5,7 @@ import com.fullstack.marvel_api_client.dto.MarvelApiResponse;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
+import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import java.security.MessageDigest;
@@ -13,6 +14,7 @@ import java.util.Date;
 import java.util.HexFormat;
 import java.util.List;
 
+@Component
 public class MarvenApiClient {
 
     @Value("${api.param.apiKey}")
