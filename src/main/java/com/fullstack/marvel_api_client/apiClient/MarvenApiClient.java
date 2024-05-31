@@ -18,10 +18,10 @@ import java.util.List;
 public class MarvenApiClient {
 
     @Value("${api.param.apiKey}")
-    String apiKey="ba17efd9c5588fd8b45bc4884a6660fd";
+    String apiKey="";
 
     @Value("${api.param.key}")
-    String key="dd74020eeb1645e669c7449be98f56ba802a28bc";
+    String key="";
 
     @Value("${api.param.ts}")
     long ts= 30;
@@ -31,7 +31,6 @@ public class MarvenApiClient {
     final String TS_PARAM = "?ts=";
     final String API_KEY_PARAM = "&apikey=";
     final String SLASH_CHAR = "/";
-
 
 
     public List<CharacterDTO> getAllCharacters(){
@@ -62,12 +61,12 @@ public class MarvenApiClient {
         return body.getData().getResults().get(0);
     }
 
-    void getTimeCalledApi(HttpHeaders headers) {
+    private void getTimeCalledApi(HttpHeaders headers) {
         long milliSeconds = headers.getDate();
         System.out.println("Response date : " + new Date(milliSeconds));
     }
 
-    String buildUri(Long characterId) {
+    private String buildUri(Long characterId) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(BASE_PATH);
         if (characterId != null) {
@@ -77,7 +76,7 @@ public class MarvenApiClient {
                 append(API_KEY_PARAM).append(this.apiKey).append(HASH_PARAM).append(generateHash()).toString();
     }
 
-    String generateHash(){
+    private String generateHash(){
         String apiKey = this.apiKey;
         String key = this.key;
         long ts = this.ts;

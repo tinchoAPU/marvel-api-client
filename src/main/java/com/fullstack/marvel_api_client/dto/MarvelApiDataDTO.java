@@ -3,10 +3,10 @@ package com.fullstack.marvel_api_client.dto;
 import java.util.List;
 
 public class MarvelApiDataDTO {
-    int count;
-    int limit;
-    int offSet;
-    List<CharacterDTO> results;
+    private int count;
+    private int limit;
+    private int offSet;
+    private List<CharacterDTO> results;
 
     public int getCount() {
         return count;

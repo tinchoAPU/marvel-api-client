@@ -3,11 +3,11 @@ package com.fullstack.marvel_api_client.dto;
 import java.util.Date;
 
 public class CharacterDTO {
-    Long id;
-    String description;
-    Date modified;
-    String name;
-    String resourceURI;
+    private Long id;
+    private String description;
+    private Date modified;
+    private String name;
+    private String resourceURI;
 
     public Long getId() {
         return id;

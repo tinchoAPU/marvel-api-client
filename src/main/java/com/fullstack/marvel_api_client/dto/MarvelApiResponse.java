@@ -1,10 +1,10 @@
 package com.fullstack.marvel_api_client.dto;
 
 public class MarvelApiResponse {
-    int code;
-    String copyright;
-    String status;
-    MarvelApiDataDTO data;
+    private int code;
+    private String copyright;
+    private String status;
+    private MarvelApiDataDTO data;
 
     public int getCode() {
         return code;

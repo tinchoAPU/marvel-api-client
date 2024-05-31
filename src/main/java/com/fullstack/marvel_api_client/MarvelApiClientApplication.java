@@ -9,9 +9,6 @@ public class MarvelApiClientApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(MarvelApiClientApplication.class, args);
-		MarvenApiClient mvCliente = new MarvenApiClient();
-		mvCliente.getAllCharacters();
-		mvCliente.getCharacterById(1009146L).toString();
 	}
 
 }
