@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.fixmarvel</groupId>
 	<artifactId>client-marvel</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.1</version>
 	<packaging>jar</packaging>
 	<name>marvel-api-client</name>
 	<description>Demo project for Spring Boot</description>
