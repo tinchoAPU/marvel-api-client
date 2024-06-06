@@ -61,6 +61,22 @@ public class MarvenApiClient {
         return body.getData().getResults().get(0);
     }
 
+
+    public CharacterDTO getCharacterByIdHarcoded() {
+        RestTemplate restTemplate = new RestTemplate();
+        String uri = buildUri(1011266L);
+        System.out.println("Generated URI : " + uri);
+
+        HttpEntity<MarvelApiResponse> entity = restTemplate.getForEntity(uri, MarvelApiResponse.class);
+        MarvelApiResponse body = entity.getBody();
+
+        getTimeCalledApi(entity.getHeaders());
+
+        System.out.println("Generated Harcoded: " + body.getData().getResults().get(0));
+        return body.getData().getResults().get(0);
+    }
+
+
     private void getTimeCalledApi(HttpHeaders headers) {
         long milliSeconds = headers.getDate();
         System.out.println("Response date : " + new Date(milliSeconds));
